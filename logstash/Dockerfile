@@ -16,6 +16,7 @@ COPY mssql-jdbc-8.2.2.jre13.jar /usr/share/logstash/logstash-core/lib/jars/mssql
 
 USER root
 RUN logstash-plugin install logstash-integration-jdbc
+RUN logstash-plugin install logstash-input-sqlite
 
 # RUN net-tools
 

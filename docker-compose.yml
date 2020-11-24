@@ -50,7 +50,7 @@ services:
       - "5000:5000/tcp"
       - "5000:5000/udp"
       - "9600:9600"
-      - "1433:1433"
+      # - "1433:1433"
     environment:
       LS_JAVA_OPTS: "-Xmx256m -Xms256m"
     networks:
@@ -71,6 +71,24 @@ services:
         read_only: true
     ports:
       - "5601:5601"
+    networks:
+      - elk
+    depends_on:
+      - elasticsearch
+  
+  sqlite:
+    build:
+      context: sqlite/
+      args:
+        ELK_VERSION: $ELK_VERSION
+    container_name: sqlite
+    # volumes:
+      # - type: bind
+        # source: ./sqlite/config/kibana.yml
+        # target: /usr/share/sqlite/config/kibana.yml
+        # read_only: true
+    ports:
+      - "1439:1439"
     networks:
       - elk
     depends_on:

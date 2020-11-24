@@ -1,8 +1,11 @@
+## Docker Hub
+dannyjeon
+
 ## Docker Build
 docker-compose build
 
 ## Docker Remove
-docker rmi [image id]  
+docker rmi [image id]
 <!-- docker rmi $(docker images -a -q) -f -->
 
 ## 사용자 및 비밀번호 변경
@@ -18,13 +21,16 @@ docker-compose exec -T elasticsearch bin/elasticsearch-setup-passwords auto --ba
 
 docker exec -it elasticsearch /bin/bash
 bin/elasticsearch-setup-passwords interactive
+<!-- SQLite Plugin Install-->
+docker exec -it logstash /bin/bash
+bin/logstash-plugin install logstash-input-sqlite
 
 ## Logstash 파이프라인 확인
 docker exec -it logstash /bin/bash
 java -jar logstash-1.3.3-flatjar.jar agent -f logstash-elasticsearch.conf -v
 
 ## 재시작
-docker-compose restart  logstash kibana elasticsearch
+docker-compose restart  logstash kibana elasticsearch sqlite
 
 ## 종료
 docker-compose down -v
