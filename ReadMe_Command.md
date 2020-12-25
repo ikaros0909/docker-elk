@@ -42,5 +42,6 @@ http://localhost:5601
 ## Docker 접속
 docker exec -it elasticsearch /bin/bash
 docker exec -it logstash /bin/bash
+docker exec -it sqlite /bin/bash
 
 

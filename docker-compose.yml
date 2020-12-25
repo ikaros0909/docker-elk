@@ -82,13 +82,25 @@ services:
       args:
         ELK_VERSION: $ELK_VERSION
     container_name: sqlite
-    # volumes:
-      # - type: bind
-        # source: ./sqlite/config/kibana.yml
-        # target: /usr/share/sqlite/config/kibana.yml
-        # read_only: true
+    environment:
+      - TERM=xterm
+      - COMPOSE_HTTP_TIMEOUT=200
+      - DEBUG=true
+    # expose:
+    #   - "3000"
+    #   - "9000"
+    volumes:
+      - type: bind
+        source: ./sqlite/local-db
+        target: /db
+        # read_only: false
     ports:
       - "1439:1439"
+    working_dir: '/db'
+    read_only: false
+    privileged: true
+    stdin_open: true
+    tty: true
     networks:
       - elk
     depends_on:
