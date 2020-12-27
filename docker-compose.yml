@@ -16,8 +16,8 @@ services:
         source: ./elasticsearch/config/user_dictionary.txt
         target: /usr/share/elasticsearch/config/user_dictionary.txt
         read_only: true
-      - type: volume
-        source: elasticsearch
+      - type: bind
+        source: ./elasticsearch/data
         target: /usr/share/elasticsearch/data
     ports:
       - "9200:9200"
@@ -93,7 +93,7 @@ services:
       - type: bind
         source: ./sqlite/local-db
         target: /db
-        # read_only: false
+        read_only: false
     ports:
       - "1439:1439"
     working_dir: '/db'
