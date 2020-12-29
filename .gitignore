@@ -1,2 +1,5 @@
 node_modules/**/*
 elasticsearch/data/*
+mssql/certs/*
+mssql/data/*
+mssql/logs/*

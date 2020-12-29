@@ -25,8 +25,6 @@ services:
     environment:
       ES_JAVA_OPTS: "-Xmx256m -Xms256m"
       ELASTIC_PASSWORD: changeme
-      # Use single node discovery in order to disable production mode and avoid bootstrap checks
-      # see https://www.elastic.co/guide/en/elasticsearch/reference/current/bootstrap-checks.html
       discovery.type: single-node
     networks:
       - elk
@@ -76,12 +74,36 @@ services:
     depends_on:
       - elasticsearch
   
+  sql.data:
+    container_name: mssql
+    image: microsoft/mssql-server-linux:latest
+    environment:
+      - SA_PASSWORD=@passW0rd
+      - ACCEPT_EULA=Y
+      - MSSQL_PID=Developer
+      - MSSQL_LCID=1042
+    volumes:
+      - ./mssql/data:/var/opt/mssql/data
+      - ./mssql/certs:/var/opt/mssql/certs
+      - ./mssql/logs:/var/opt/mssql/log
+    ports:
+      - "1434:1433"
+    read_only: false
+    # privileged: true
+    # stdin_open: true
+    # tty: true
+    networks:
+      - elk
+    depends_on:
+      - elasticsearch
+
   sqlite:
     build:
       context: sqlite/
       args:
         ELK_VERSION: $ELK_VERSION
     container_name: sqlite
+    image: keinos/sqlite3:latest
     environment:
       - TERM=xterm
       - COMPOSE_HTTP_TIMEOUT=200
