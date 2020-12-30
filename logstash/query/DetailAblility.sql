@@ -1,1 +1,0 @@
-select Year, Grade, Content, Content2, Content3 from DetailAblility

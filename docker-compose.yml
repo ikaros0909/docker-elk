@@ -44,6 +44,14 @@ services:
         source: ./logstash/pipeline
         target: /usr/share/logstash/pipeline
         read_only: true
+      - type: bind
+        source: ./sqlite/local-db
+        target: /db
+        read_only: false
+      - type: bind
+        source: ./logstash/query
+        target: /query
+        read_only: true
     ports:
       - "5000:5000/tcp"
       - "5000:5000/udp"
