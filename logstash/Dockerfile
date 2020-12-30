@@ -10,10 +10,10 @@ USER root
 ADD config/ /usr/share/logstash/config
 
 USER logstash
-COPY mssql-jdbc-8.2.2.jre8.jar /usr/share/logstash/logstash-core/lib/jars/mssql-jdbc-8.2.2.jre8.jar
-COPY mssql-jdbc-8.2.2.jre11.jar /usr/share/logstash/logstash-core/lib/jars/mssql-jdbc-8.2.2.jre11.jar
-COPY mssql-jdbc-8.2.2.jre13.jar /usr/share/logstash/logstash-core/lib/jars/mssql-jdbc-8.2.2.jre13.jar
-COPY sqlite-jdbc-3.34.0.jar /usr/share/logstash/logstash-core/lib/jars/sqlite-jdbc-3.34.0.jar
+COPY ./jdbc/mssql-jdbc-8.2.2.jre8.jar /usr/share/logstash/logstash-core/lib/jars/mssql-jdbc-8.2.2.jre8.jar
+COPY ./jdbc/mssql-jdbc-8.2.2.jre11.jar /usr/share/logstash/logstash-core/lib/jars/mssql-jdbc-8.2.2.jre11.jar
+COPY ./jdbc/mssql-jdbc-8.2.2.jre13.jar /usr/share/logstash/logstash-core/lib/jars/mssql-jdbc-8.2.2.jre13.jar
+COPY ./jdbc/sqlite-jdbc-3.34.0.jar /usr/share/logstash/logstash-core/lib/jars/sqlite-jdbc-3.34.0.jar
 
 USER root
 RUN bin/logstash-plugin install logstash-integration-jdbc
