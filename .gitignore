@@ -3,3 +3,4 @@ elasticsearch/data/*
 mssql/certs/*
 mssql/data/*
 mssql/logs/*
+elk-node/node_modules

@@ -45,7 +45,7 @@ services:
         target: /usr/share/logstash/pipeline
         read_only: true
       - type: bind
-        source: ./sqlite/local-db
+        source: ./elk-node/local-db
         target: /db
         read_only: false
       - type: bind
@@ -105,13 +105,13 @@ services:
     depends_on:
       - elasticsearch
 
-  sqlite:
+  elk-node:
     build:
-      context: sqlite/
+      context: elk-node/
       args:
         ELK_VERSION: $ELK_VERSION
-    container_name: sqlite
-    image: keinos/sqlite3:latest
+    container_name: elk-node
+    image: node:12-alpine
     environment:
       - TERM=xterm
       - COMPOSE_HTTP_TIMEOUT=200
@@ -121,12 +121,12 @@ services:
     #   - "9000"
     volumes:
       - type: bind
-        source: ./sqlite/local-db
+        source: ./elk-node/local-db
         target: /db
         read_only: false
     ports:
-      - "1439:1439"
-    working_dir: '/db'
+      - "3000:3000"
+    working_dir: '/app'
     read_only: false
     privileged: true
     stdin_open: true

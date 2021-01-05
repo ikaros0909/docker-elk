@@ -1,0 +1,15 @@
+{
+  "name": "elk-node",
+  "version": "1.0.0",
+  "description": "docker build -t sqlite .",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ."
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
